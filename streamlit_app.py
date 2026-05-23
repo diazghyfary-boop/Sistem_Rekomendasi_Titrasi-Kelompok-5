@@ -14,3 +14,8 @@ import streamlit as st
 title = st.text_input("Movie title", "Life of Brian")
 st.write("The current movie title is", title)
 
+if st.button("Say hello"):
+    st.write("Why hello there")
+else:
+    st.write("Goodbye")
+
