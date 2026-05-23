@@ -9,5 +9,8 @@ st.title("📊 Dashboard")
 st.header("Laporan Bulanan")
 st.subheader("📈 Monthly Expenses")
 st.caption("Made with ❤️ using Streamlit")
+import streamlit as st
 
+title = st.text_input("Movie title", "Life of Brian")
+st.write("The current movie title is", title)
 
