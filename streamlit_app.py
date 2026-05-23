@@ -1,6 +1,7 @@
 import streamlit as st
 st.set_page_config(
-  page_title="Finance Dashboard",
+  page_title="Percobaan 1",
+  page_icon="🧊",
   layout="wide"
 )
 st.title("📊 Dashboard")
