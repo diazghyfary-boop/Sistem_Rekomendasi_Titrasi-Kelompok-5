@@ -143,3 +143,5 @@ data_uji = {
             "kelarutan": "Asam sulfat pekat berada di lapisan bawah karena massa jenisnya lebih besar dan membentuk batas fasa yang tidak bercampur secara langsung dengan sampel.",
             "waktu": "30 - 60 detik",
             "reaksi": "$$\\text{Heksosa} \\xrightarrow{H_2SO_4} \\text{Hidroksimetilfurfural} \\xrightarrow{\\alpha\\text{-naftol}} \\text{Kompleks Ungu}$$",
+        }
+    }
