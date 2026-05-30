@@ -150,7 +150,7 @@ elif menu == "Halaman 2 - Informasi Unsur":
 # HALAMAN SELESAI
 elif menu == "Selesai":
 
-    st.balloons()
+    st.chemistry()
 
     st.success(
         "🎉 Terima kasih telah memakai website kami."
