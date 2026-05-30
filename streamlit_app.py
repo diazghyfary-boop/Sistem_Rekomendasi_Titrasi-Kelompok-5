@@ -3,12 +3,12 @@ import time
 
 # Konfigurasi Halaman Utama
 st.set_page_config(
-    page_title="Lab Kimia Organik Virtual",
+    page_title="Lab Kimia Organik Virtual v2",
     page_icon="🧪",
     layout="wide"
 )
 
-# Kustomisasi CSS untuk Animasi Teks Terima Kasih
+# Kustomisasi CSS untuk Animasi Teks Terima Kasih dan Kartu Informasi
 st.markdown("""
 <style>
 @keyframes pulse {
@@ -26,145 +26,115 @@ st.markdown("""
     background-color: #f0f2f6;
     margin-top: 50px;
 }
+.metric-box {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 5px solid #1f77b4;
+    margin-bottom: 10px;
+}
 </style>
 """, unsafe_allow_html=True)
 
-# Definisikan Data Pengujian Kimia Organik
+# Definisikan Data Pengujian Kimia Organik Lengkap
 data_uji = {
     "Hidrokarbon 🛢️": {
         "Uji Bromin ($Br_2/CCl_4$)": {
             "tujuan": "Mendeteksi adanya ikatan rangkap dua atau tiga (ketidakjenuhan) pada hidrokarbon.",
             "sifat": "Reaksi adisi halogen pada ikatan rangkap tanpa menghasilkan gas sampingan.",
-            "kejadian": "Larutan bromin yang berwarna cokelat kemerahan diteteskan ke dalam sampel hidrokarbon alkana dan alkena.",
-            "warna": "Pada alkena/alkuna warna cokelat merah **cepat memudar (jernih)**. Pada alkana warna tetap cokelat merah (kecuali ada cahaya UV).",
+            "kejadian": "Larutan bromin diteteskan ke dalam sampel hidrokarbon secara perlahan.",
+            "hasil": "Positif pada alkena/alkuna (senyawa tak jenuh). Negatif pada alkana.",
+            "warna": "Warna cokelat kemerahan dari bromin berubah menjadi **jernih/tidak berwarna**.",
+            "kelarutan": "Produk hasil reaksi bersifat non-polar dan larut sempurna dalam pelarut $CCl_4$ atau kloroform.",
+            "waktu": "Sangat cepat, berkisar antara **1 - 5 detik** pada suhu ruang (spontan).",
             "reaksi": "$$R-CH=CH-R + Br_2 \\rightarrow R-CH(Br)-CH(Br)-R$$",
-            "gagal": "Reaksi gagal memudar pada senyawa jenuh (alkana), atau reagen bromin sudah terurai karena terlalu lama disimpan di tempat terang."
+            "gagal": "Warna cokelat merah tidak memudar. Hal ini terjadi jika sampel adalah alkana jenuh, atau reagen bromin sudah rusak/terurai akibat paparan cahaya matahari langsung."
         },
         "Uji Baeyer ($KMnO_4$)": {
             "tujuan": "Mengidentifikasi ikatan rangkap alifatik tak jenuh.",
-            "sifat": "Oksidasi ringan oleh reduktor kuat dalam suasana netral atau basa.",
-            "kejadian": "Penambahan larutan kalium permanganat ungu ke dalam senyawa tak jenuh.",
-            "warna": "Warna ungu $KMnO_4$ **hilang** dan terbentuk **endapan cokelat** ($MnO_2$).",
+            "sifat": "Oksidasi ringan oleh oksidator kuat dalam suasana netral atau basa.",
+            "kejadian": "Penambahan larutan kalium permanganat ungu ke dalam senyawa sampel.",
+            "hasil": "Terbentuk glikol (diol) dan endapan mangan dioksida.",
+            "warna": "Warna ungu tua $KMnO_4$ **hilang** dan berganti menjadi **endapan cokelat tua**.",
+            "kelarutan": "Endapan cokelat $MnO_2$ yang terbentuk **tidak larut** dalam air dan mengendap di dasar tabung.",
+            "waktu": "Terjadi secara instan, berkisar antara **5 - 15 detik** setelah pengocokan.",
             "reaksi": "$$3R-CH=CH-R + 2KMnO_4 + 4H_2O \\rightarrow 3R-CH(OH)-CH(OH)-R + 2MnO_2\\downarrow + 2KOH$$",
-            "gagal": "Warna ungu tidak hilang jika sampel adalah alkana atau aromatik stabil (seperti benzena)."
+            "gagal": "Warna ungu tidak hilang dan tidak ada endapan cokelat. Gagal jika sampel adalah alkana atau senyawa aromatik stabil seperti benzena."
         }
     },
     "Protein 🧬": {
         "Uji Biuret": {
             "tujuan": "Mendeteksi keberadaan ikatan peptida dalam suatu zat.",
-            "sifat": "Pembentukan senyawa kompleks koordinasi antara ion tembaga dengan nitrogen peptida.",
+            "sifat": "Pembentukan senyawa kompleks koordinasi antara ion tembaga dengan nitrogen dari ikatan peptida.",
             "kejadian": "Larutan protein dicampur $NaOH$ kemudian ditetesi $CuSO_4$ encer.",
-            "warna": "Perubahan warna larutan menjadi **ungu atau violet**.",
+            "hasil": "Positif menunjukkan adanya senyawa dengan minimal dua ikatan peptida.",
+            "warna": "Perubahan warna dari biru muda (reagen) menjadi **ungu/violet murni**.",
+            "kelarutan": "Kompleks protein-tembaga yang terbentuk **larut sempurna** dalam air (membentuk larutan jernih berwarna ungu).",
+            "waktu": "Berkisar antara **30 detik - 1 menit** pada suhu kamar tanpa pemanasan.",
             "reaksi": "$$\\text{Protein} + Cu^{2+} + OH^- \\rightarrow \\text{Kompleks Koordinasi Biuret (Warna Ungu)}$$",
-            "gagal": "Warna tetap biru muda. Gagal jika sampel hanya berupa asam amino tunggal (kecuali histidin) karena tidak memiliki ikatan peptida minimun minimal dua."
+            "gagal": "Warna tetap biru muda. Reaksi gagal jika sampel merupakan asam amino tunggal (misal glisin) karena tidak memiliki ikatan peptida."
         },
         "Uji Xantoproteat": {
-            "tujuan": "Mengidentifikasi asam amino yang memiliki cincin benzena (seperti tirosin, triptofan, fenilalanin).",
+            "tujuan": "Mengidentifikasi asam amino yang memiliki cincin benzena (tirosin, triptofan, fenilalanin).",
             "sifat": "Reaksi nitrasi pada inti benzena oleh asam nitrat pekat.",
-            "kejabin": "Sampel dipanaskan bersama $HNO_3$ pekat, lalu didinginkan dan ditambahkan basa ($NaOH$/$NH_4OH$).",
-            "warna": "Terbentuk **endapan/larutan kuning**, yang berubah menjadi **jingga** setelah ditambah basa.",
+            "kejadian": "Sampel dipanaskan bersama $HNO_3$ pekat, didinginkan, lalu ditambahkan basa kuat.",
+            "hasil": "Terbentuk senyawa turunan nitro-benzena.",
+            "warna": "Saat dipanaskan terbentuk **warna kuning**, setelah ditambah basa berubah menjadi **jingga/oranye**.",
+            "kelarutan": "Sebagian protein terkoagulasi (menggumpal dan **tidak larut**) saat ditambah asam pekat, namun larut kembali sebagian setelah suasananya menjadi basa.",
+            "waktu": "Memerlukan pemanasan selama **1 - 2 menit** hingga warna kuning muncul, dan perubahan menjadi jingga terjadi dalam **3 - 5 detik** setelah ditetesi basa.",
             "reaksi": "$$\\text{Cincin Benzena (Protein)} + HNO_3 \\xrightarrow{\\Delta} \\text{Turunan Nitro (Kuning)} \\xrightarrow{NaOH} \\text{Garam Nitro (Jingga)}$$",
-            "gagal": "Warna tidak berubah jingga jika protein tidak mengandung gugus asam amino aromatik."
+            "gagal": "Warna larutan tidak berubah menjadi jingga. Gagal terjadi jika protein tidak mengandung asam amino aromatik (seperti pada gelatin murni)."
         }
     },
     "Asam Karboksilat 🍋": {
         "Uji Natrium Bikarbonat ($NaHCO_3$)": {
             "tujuan": "Menguji sifat keasaman relatif senyawa organik (membedakan asam karboksilat dengan fenol).",
-            "sifat": "Reaksi asam-basa yang menghasilkan gas karbon dioksida.",
-            "kejadian": "Sampel direaksikan dengan larutan $NaHCO_3$ 5%.",
-            "warna": "Larutan tetap jernih, namun terlihat fasa gas yang aktif.",
+            "sifat": "Reaksi asam-basa kuat-lemah yang menghasilkan gas karbon dioksida.",
+            "kejadian": "Sampel padat atau cair direaksikan dengan larutan $NaHCO_3$ 5%.",
+            "hasil": "Terbentuk garam natrium karboksilat air, dan pelepasan gas.",
+            "warna": "Larutan tetap **jernih/tidak berwarna**, namun terlihat gelembung gas yang bergerak aktif.",
+            "kelarutan": "Asam karboksilat yang awalnya sukar larut dalam air akan menjadi **larut sempurna** karena berubah menjadi garam natrium yang polar.",
+            "waktu": "Sangat cepat dan spontan, gelembung langsung muncul dalam **1 - 3 detik**.",
             "reaksi": "$$R-COOH + NaHCO_3 \\rightarrow R-COONa + H_2O + CO_2\\uparrow$$",
-            "gagal": "Tidak ada gelembung gas ($CO_2$). Gagal terjadi jika tingkat keasaman senyawa terlalu lemah ($pK_a > 7$) seperti pada alkohol biasa."
+            "gagal": "Tidak ada gelembung gas sama sekali. Gagal jika tingkat keasaman senyawa terlalu lemah ($pK_a > 7$) seperti alkohol atau fenol terhambat sterik."
         },
         "Uji Esterifikasi": {
             "tujuan": "Mengidentifikasi gugus karboksilat melalui pembentukan senyawa ester berbau khas.",
-            "sifat": "Reaksi kondensasi reversibel pelepasan air dengan bantuan katalis asam.",
-            "kejadian": "Asam karboksilat dipanaskan bersama alkohol (misal etanol) dan beberapa tetes $H_2SO_4$ pekat.",
-            "warna": "Tidak ada perubahan warna signifikan, terbentuk lapisan minyak tipis di permukaan air.",
+            "sifat": "Reaksi kondensasi reversibel pelepasan air dengan bantuan katalis asam kuat pekat.",
+            "kejadian": "Asam karboksilat dipanaskan bersama alkohol (etanol) dan beberapa tetes asam sulfat pekat.",
+            "hasil": "Terbentuk senyawa ester (alkil alkanoat).",
+            "warna": "Larutan tetap **jernih/tidak berwarna**.",
+            "kelarutan": "Ester yang terbentuk bersifat non-polar sehingga **tidak larut** dalam air dan membentuk lapisan minyak tipis tersendiri di permukaan cairan.",
+            "waktu": "Memerlukan proses pemanasan (refluks/penangas air) selama **5 - 10 menit**.",
             "reaksi": "$$R-COOH + R'-OH \\xrightarrow{H_2SO_4, \\Delta} R-COOR' + H_2O$$",
-            "gagal": "Tidak tercium aroma buah (ester). Gagal karena pemanasan kurang lama, atau hilangnya katalis asam pekat yang berfungsi mengikat air."
+            "gagal": "Tidak tercium aroma buah (aroma khas ester) dan tidak ada lapisan minyak. Gagal karena pemanasan kurang lama atau kontaminasi air yang menggeser kesetimbangan ke arah kiri."
         }
     },
     "Minyak dan Lemak 🧈": {
         "Uji Akrolein": {
-            "tujuan": "Mendeteksi keberadaan gliserol atau lemak/minyak yang mengandung gliserol.",
-            "sifat": "Dehidrasi gliserol oleh agen pendehidrasi pada suhu tinggi.",
-            "kejadian": "Sampel dipanaskan kuat bersama agen pendehidrasi seperti $KHSO_4$ jenuh.",
-            "warna": "Asap putih terbentuk disertai bau menusuk hidung yang sangat tajam (akrolein).",
+            "tujuan": "Mendeteksi keberadaan gliserol atau senyawa lemak/minyak yang mengandung struktur gliserol.",
+            "sifat": "Dehidrasi gliserol oleh agen pendehidrasi kuat pada suhu tinggi.",
+            "kejadian": "Sampel minyak dipanaskan kuat bersama kristal kalium hidrogen sulfat ($KHSO_4$).",
+            "hasil": "Terbentuk senyawa aldehid tak jenuh bernama akrolein.",
+            "warna": "Muncul asap putih tebal di dalam tabung reaksi.",
+            "kelarutan": "Gas akrolein yang terbentuk menguap ke udara, sementara residu sisa pembakaran karbon berwarna hitam **tidak larut** di dasar tabung.",
+            "waktu": "Asap putih dan bau menyengat mulai tercium setelah dipanaskan selama **2 - 3 menit**.",
             "reaksi": "$$\\text{Gliserol} \\xrightarrow{KHSO_4, \\Delta} \\text{Akrolein } (CH_2=CH-CHO) + 2H_2O$$",
-            "gagal": "Tidak menghasilkan bau menusuk. Gagal jika sampel berupa minyak mineral/lilin hidrokarbon buatan yang tidak berbasis trigliserida."
+            "gagal": "Tidak menghasilkan bau menusuk hidung yang khas. Gagal jika sampel merupakan minyak bumi (minyak mineral/parafin) yang tidak tersusun atas senyawa trigliserida."
         },
         "Uji Ketidakjenuhan Lemak": {
-            "tujuan": "Membedakan lemak jenuh (padat/hewani) dan lemak tak jenuh (cair/nabati).",
-            "sifat": "Adisi iodium/bromin pada asam lemak rantai karbon.",
-            "kejadian": "Minyak ditetesi larutan iodium atau Hubl.",
-            "warna": "Warna iodium **hilang/pudar** pada minyak nabati, namun **tetap berwarna** pada lemak jenuh.",
+            "tujuan": "Membedakan asam lemak jenuh (lemak padat) dan asam lemak tak jenuh (minyak nabati cair).",
+            "sifat": "Adisi halogen (iodium atau bromin) pada rantai karbon berikatan rangkap.",
+            "kejadian": "Minyak dilarutkan dalam kloroform lalu ditetesi larutan iodium.",
+            "hasil": "Adisi sukses pada titik ikatan rangkap minyak nabati.",
+            "warna": "Warna merah/merah muda dari iodium **hilang/pudar** pada minyak tak jenuh, dan **tetap berwarna merah** pada lemak jenuh.",
+            "kelarutan": "Seluruh komponen reagen dan sampel **larut sempurna** di dalam pelarut kloroform.",
+            "waktu": "Warna memudar secara bertahap dalam waktu **1 - 2 menit** sembari tabung digoyang-goyangkan.",
             "reaksi": "$$\\text{Asam Lemak Tak Jenuh} + I_2 \\rightarrow \\text{Senyawa Di-iodo Jenuh}$$",
-            "gagal": "Warna merah iodium tidak hilang jika reagen terlalu pekat atau minyak sudah tengik (mengalami otooksidasi)."
+            "gagal": "Warna merah tidak pudar pada sampel minyak nabati. Gagal akibat minyak sudah terlalu lama disimpan dan mengalami tengik (oksidasi alami) sehingga ikatan rangkapnya sudah rusak."
         }
     },
     "Karbohidrat 🌾": {
         "Uji Molisch": {
-            "tujuan": "Uji umum untuk mendeteksi keberadaan segala jenis karbohidrat.",
-            "sifat": "Dehidrasi karbohidrat oleh asam pekat membentuk furfural yang berkondensasi dengan alfa-naftol.",
-            "kejadian": "Larutan karbohidrat dicampur reagen Molisch, lalu dialirkan $H_2SO_4$ pekat lewat dinding tabung.",
-            "warna": "Terbentuk **cincin berwarna ungu** di perbatasan kedua lapisan cairan.",
-            "reaksi": "$$\\text{Heksosa} \\xrightarrow{H_2SO_4} \\text{Hidroksimetilfurfural} \\xrightarrow{\\alpha\\text{-naftol}} \\text{Kompleks Ungu}$$",
-            "gagal": "Cincin ungu tidak terbentuk. Gagal jika penambahan asam sulfat terlalu cepat (mengocok tabung terlalu kuat) sehingga memicu pembakaran arang/karbon hitam."
-        },
-        "Uji Benedict": {
-            "tujuan": "Mendeteksi keberadaan gula pereduksi (glukosa, fruktosa, maltosa, laktosa).",
-            "sifat": "Reduksi ion $Cu^{2+}$ menjadi $Cu^+$ dalam suasana basa lemah sitrat.",
-            "kejadian": "Sampel dicampur reagen Benedict lalu dipanaskan dalam penangas air mendidih selama 5 menit.",
-            "warna": "Perubahan warna dari biru menjadi hijau, kuning, hingga terbentuk **endapan merah bata** ($Cu_2O$).",
-            "reaksi": "$$R-CHO + 2Cu^{2+} (basa) + 2H_2O \\rightarrow R-COOH + Cu_2O\\downarrow + 4H^+$$",
-            "gagal": "Warna tetap biru jernih (misal pada sukrosa atau amilum) karena tidak memiliki gugus aldehid/keton bebas yang dapat berikatan."
-        }
-    }
-}
-
-# --- SIDEBAR NAVIGASI ---
-with st.sidebar:
-    st.header("🔬 Navigasi Menu")
-    
-    # Tambahkan opsi Halaman Utama / Keluar
-    menu_options = ["🏠 Halaman Utama"] + list(data_uji.keys()) + ["🚪 Keluar Aplikasi"]
-    pilihan_halaman = st.radio("Pilih Bab Percobaan:", menu_options)
-    
-    st.divider()
-    st.caption("Aplikasi Lab Kimia Organik Virtual © 2026")
-
-# --- KONTEN HALAMAN UTAMA ---
-if pilihan_halaman == "🏠 Halaman Utama":
-    st.title("🧪 Laboratorium Virtual Kimia Organik")
-    st.subheader("Selamat datang di platform simulasi praktikum kimia karbon.")
-    st.write(
-        "Silakan pilih **Bab Percobaan** pada menu di sebelah kiri untuk melihat detail prosedur "
-        "analisis kualitatif, sifat fisik, visualisasi warna hasil, persamaan reaksi, hingga analisis kegagalan uji."
-    )
-    
-    # Tampilkan ringkasan ringkas materi
-    col1, col2 = st.columns(2)
-    with col1:
-        st.info("**Tips Praktikum:** Pastikan reagen yang digunakan segar dan amati instruksi pemanasan tabung dengan saksama.")
-    with col2:
-        st.warning("**Aspek Keamanan:** Gunakan ruang asam saat mereaksikan asam nitrat pekat ($HNO_3$) dan asam sulfat ($H_2SO_4$).")
-
-# --- KONTEN HALAMAN KELUAR (ANIMASI TERIMA KASIH) ---
-elif pilihan_halaman == "🚪 Keluar Aplikasi":
-    st.empty() # Membersihkan tampilan sementara
-    st.markdown('<div class="animated-thankyou">terima kasih dan kembalilah lagi!</div>', unsafe_allow_html=True)
-    st.balloons() # Efek animasi balon pendukung tambahan dari Streamlit
-
-# --- KONTEN BAB PERCOBAAN ORGANIK ---
-else:
-    bab = pilihan_halaman
-    st.title(f"Bab: {bab}")
-    st.write(f"Berikut adalah daftar modul uji coba kualitatif fungsional untuk kategori **{bab}**.")
-    
-    # Mengambil daftar sub-uji berdasarkan bab yang dipilih
-    daftar_sub_uji = list(data_uji[bab].keys())
-    
-    # Membuat tab dinamis untuk tiap sub-pengujian di dalam bab
-    tabs = st.tabs(daftar_sub_uji)
-    
+            "tujuan": "Uji umum universal untuk mendeteksi keberadaan segala jenis karbohidrat.",
+            "sifat": "Dehidrasi karbohidrat oleh asam pekat membentuk senyawa furfural yang berkondensasi dengan alfa-naftol.",
