@@ -98,7 +98,7 @@ if menu == "Halaman 1 - Tabel Periodik":
     """)
 
     st.image(
-        "https://share.google/jmSXkH9eKpHooJMeR",
+        "fea529910ea2c341dfe5087bb2c0ec42.jpg",
         caption="Tabel Periodik Unsur",
         use_container_width=True
     )
