@@ -181,7 +181,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         "Pilih Metode Standarisasi",
         [
             "── Pilih ──",
-            " Natrium Hidroksida (NaOH) dengan Asam Oksalat (H₂C₂O₄)",
+            "Natrium Hidroksida (NaOH) dengan Asam Oksalat (H₂C₂O₄)",
             "HCl dengan Boraks",
             "KMnO4 dengan Asam Oksalat",
             "Na2S2O3 dengan Kalium Dikromat",
