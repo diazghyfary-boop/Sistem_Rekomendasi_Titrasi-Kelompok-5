@@ -1,4 +1,4 @@
-![alt text] (?raw=true)
+![image alt] (https://github.com/diazghyfary-boop/proyekdiaz137/blob/0c1193e66b4b5e2781efe11468e64f915f3bc246/IMAGE%20KIMIA.jpeg)
 # 🎈 Blank app template
 
 A simple Streamlit app template for you to modify!
