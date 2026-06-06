@@ -255,8 +255,7 @@ if fitur == "Menghitung Standarisasi Larutan":
                 BM = 100.09  # mg/mmol
                 M = massa / ((100 / 25) * volume * BM)
                 st.write("Rumus:")
-                st.write("Normalitas EDTA = massa CaCO₃ (mg) / ((100mL/25mL) × volume EDTA (mL) × BM CaCO₃ (mg/mmol))")
-                st.success(f"Normalitas EDTA= {massa} (mg) / ((100mL/25mL) × {volume} (mL) × {BM} (mg/mmol))")
+                st.write("Normalitas EDTA = massa CaCO₃ (mg) / ((100mL/25mL) × volume EDTA (mL) × BM CaCO₃ (mg/mmol))") 
                 st.success(f"Normalitas EDTA = {N:.4f} mgrek/mL")
                 st.success(f"Molaritas EDTA = {M:.4f} mmol/mL (M)")
             else:
