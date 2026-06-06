@@ -233,7 +233,7 @@ if fitur == "Menghitung Standarisasi Larutan":
             else:
                 st.error("Volume tidak boleh 0.")
 
-    elif metode == "Tiosulfat dengan Kalium Dikromat":
+    elif metode == "Na2B4O7 dengan Kalium Dikromat":
         massa = st.number_input("Massa K₂Cr₂O₇ (mg)", min_value=0.0, format="%.1f")
         volume = st.number_input("Volume Na₂S₂O₃ (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
@@ -247,7 +247,7 @@ if fitur == "Menghitung Standarisasi Larutan":
             else:
                 st.error("Volume tidak boleh 0.")
 
-    elif metode == "EDTA dengan Kalsium Karbonat (CaCO₃)":
+    elif metode == "EDTA dengan CaCO3":
         massa = st.number_input("Massa CaCO₃  (mg)", min_value=0.0, format="%.1f")
         volume = st.number_input("Volume EDTA (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
