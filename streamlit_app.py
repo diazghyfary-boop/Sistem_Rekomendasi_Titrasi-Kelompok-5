@@ -162,8 +162,8 @@ st.markdown("### 🎯 Pilih Tujuan")
 fitur = st.radio(
     "",
     [
-        "Menentukan Indikator Titrasi",
-        "Menghitung Standarisasi Larutan"
+        "MENENTUKAN INDIKATOR TITRASI",
+        "MENGHITUNG STANDARISASI LARUTAN"
     ]
 )
 
@@ -172,9 +172,9 @@ st.divider()
 # ─────────────────────────────────────────────
 # FITUR 1 — STANDARISASI LARUTAN
 # ─────────────────────────────────────────────
-if fitur == "Menghitung Standarisasi Larutan":
+if fitur == "MENGHITUNG STANDARISASI LARUTAN":
 
-    st.subheader("🧪 Perhitungan Standarisasi Larutan")
+    st.subheader("🧪 PERHITUNGAN STANDARISASI LARUTAN")
 
     # FIX: gunakan selectbox dengan pilihan string biasa, bukan st.button()
     metode = st.selectbox(
@@ -269,7 +269,7 @@ if fitur == "Menghitung Standarisasi Larutan":
 # ─────────────────────────────────────────────
 elif fitur == "MENENTUKAN INDIKATOR TITRASI":
 
-    step(1, "PILIH JENIS TITRASI")
+    step(1, "🧪PILIH JENIS TITRASI")
 
     JENIS = [
         "── PILIH ──",
