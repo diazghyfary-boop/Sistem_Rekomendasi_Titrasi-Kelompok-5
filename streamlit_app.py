@@ -196,10 +196,10 @@ if fitur == "Menghitung Standarisasi Larutan":
             if volume > 0:
                 BE = 0.063  # mg/mgrek (BM=126, valensi=2 → BE=63 g/ek = 0.063 mg/mgrek)
                 N = massa / ((100 / 25) * volume * BE)
-                st.success(f"Normalitas NaOH = mg Asam Oksalat / ((100 mL/25 mL) × mL NaOH × BE Asam Oksalat)",
-                "Normalitas NaOH = {massa} mg / ((100 mL / 25 mL) × {volume} mL × {BE} mg/mgrek )",
-                "Normalitas NaOH = {N:.4f} mgrek/mL"
-                "Normalitas NaOH = {N:.4f} N")
+                st.write("Rumus:")
+                st.write("N = massa / ((100/25) × volume × BE)")
+                st.write(f"N = {massa:.4f} mg / ((100/25) × {volume:.2f} mL × {BE} mg/mgrek)")
+                st.success(f"Normalitas NaOH = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
 
