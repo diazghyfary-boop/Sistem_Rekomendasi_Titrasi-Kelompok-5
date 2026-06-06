@@ -219,7 +219,7 @@ if fitur == "Menghitung Standarisasi Larutan":
             else:
                 st.error("Volume tidak boleh 0.")
 
-    elif metode == "Kalium Permanganat (KMnO₄) dengan Asam Oksalat (H₂C₂O₄)":
+    elif metode == "KMnO4 dengan Asam Oksalat":
         massa = st.number_input("Massa Asam Oksalat (mg)", min_value=0.0, format="%.1f")
         volume = st.number_input("Volume KMnO4 (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
@@ -233,7 +233,7 @@ if fitur == "Menghitung Standarisasi Larutan":
             else:
                 st.error("Volume tidak boleh 0.")
 
-    elif metode == "Tiosulfat (Na₂S₂O₃) dengan Kalium Dikromat (K₂Cr₂O₇)":
+    elif metode == "Tiosulfat dengan Kalium Dikromat":
         massa = st.number_input("Massa K₂Cr₂O₇ (mg)", min_value=0.0, format="%.1f")
         volume = st.number_input("Volume Na₂S₂O₃ (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
