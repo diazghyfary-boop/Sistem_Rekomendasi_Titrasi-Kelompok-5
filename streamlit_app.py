@@ -11,12 +11,11 @@ img = get_base64("IMAGE KIMIA.jpeg")
 
 page_bg_img = f"""
 <style>
-[data-testid="stAppViewContainer"] {{
-    background-image: url("https://github.com/diazghyfary-boop/proyekdiaz137/blob/0c1193e66b4b5e2781efe11468e64f915f3bc246/IMAGE%20KIMIA.jpeg;base64,{img}");
+.stApp {
+    background-image: url("https://github.com/diazghyfary-boop/proyekdiaz137/blob/0c1193e66b4b5e2781efe11468e64f915f3bc246/IMAGE%20KIMIA.jpeg,{img}");
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-}}
+}
 </style>
 """
 
