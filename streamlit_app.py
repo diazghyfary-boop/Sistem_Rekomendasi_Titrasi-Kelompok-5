@@ -181,7 +181,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         "Pilih Metode Standarisasi",
         [
             "── Pilih ──",
-            "NaOH dengan Asam Oksalat",
+            " Natrium Hidroksida (NaOH) dengan Asam Oksalat (H₂C₂O₄)",
             "HCl dengan Boraks",
             "KMnO4 dengan Asam Oksalat",
             "Na2S2O3 dengan Kalium Dikromat",
@@ -189,7 +189,7 @@ if fitur == "Menghitung Standarisasi Larutan":
         ]
     )
 
-    if metode == "NaOH dengan Asam Oksalat":
+    if metode == "Natrium Hidroksida (NaOH) dengan Asam Oksalat (H₂C₂O₄)":
         massa = st.number_input("Massa Asam Oksalat (mg)", min_value=0.0, format="%.1f")
         volume = st.number_input("Volume NaOH (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
