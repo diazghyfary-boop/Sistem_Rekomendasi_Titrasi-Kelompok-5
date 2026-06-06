@@ -1,5 +1,25 @@
 import streamlit as st
+import base64
 
+def get_base64(bin_file):
+    with open(bin_file, "rb") as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+img = get_base64("background.jpeg")
+
+page_bg_img = f"""
+<style>
+[data-testid="stAppViewContainer"] {{
+    background-image: url("https://github.com/diazghyfary-boop/proyekdiaz137/blob/0c1193e66b4b5e2781efe11468e64f915f3bc246/IMAGE%20KIMIA.jpeg,{img}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}}
+</style>
+"""
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
 # ─────────────────────────────────────────────
 # PAGE CONFIG
 # ─────────────────────────────────────────────
@@ -130,6 +150,7 @@ st.markdown(
     unsafe_allow_html=True,
     
 )
+
 
 # ─────────────────────────────────────────────
 # HELPER FUNCTIONS
