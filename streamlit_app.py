@@ -9,7 +9,6 @@ st.set_page_config(
     layout="centered",
 )
 
-def get_base64(bin_file):
 st.image("IMAGE KIMIA.jpeg")
 
 page_bg_img = """
