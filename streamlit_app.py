@@ -33,19 +33,19 @@ p, label, span, div,
 
 /* Radio button */
 .stRadio label {
-    color: white !important;
+    color: black !important;
     font-weight: bold !important;
 }
 
 /* Selectbox */
 .stSelectbox div {
-    color: white !important;
+    color: black !important;
     font-weight: bold !important;
 }
 
 /* Tabel markdown */
 table, th, td {
-    color: white !important;
+    color: black !important;
     font-weight: bold !important;
 }
 
