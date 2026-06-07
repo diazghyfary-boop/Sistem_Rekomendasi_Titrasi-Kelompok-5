@@ -27,7 +27,7 @@ p, label, span, div,
 .stText,
 .stRadio label,
 .stSelectbox label {
-    color: white !important;
+    color: black !important;
     font-weight: bold !important;
 }
 
