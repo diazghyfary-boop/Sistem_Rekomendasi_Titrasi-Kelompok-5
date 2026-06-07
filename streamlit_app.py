@@ -29,7 +29,7 @@ p, label, .stMarkdown, .stText, .stRadio label, .stSelectbox label {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   🎯 FIX DROPDOWN & INPUT BOX - GRADASI BIRU & TEKS PUTIH
+   🎯 DROPDOWN & INPUT BOX - GRADASI BIRU & TEKS PUTIH
    ───────────────────────────────────────────────────────────── */
 
 /* ==================== 1. SELECTBOX (DROPDOWN) ==================== */
@@ -646,7 +646,7 @@ elif fitur == "MENENTUKAN INDIKATOR TITRASI":
 st.divider()
 st.markdown(
     """
-    <div style='text-align:center; color:#999; font-size:.8em; margin-top:4px'>
+    <div style='text-align:center; color: #000000 !important; font-weight: bold !important; font-size: .85em; margin-top:4px;'>
         ⚛️ Sistem Rekomendasi Titrasi &nbsp;|&nbsp; Kelompok 5
     </div>
     """,
