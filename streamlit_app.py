@@ -39,7 +39,7 @@ p, label, span, div,
 
 /* Selectbox */
 .stSelectbox div {
-    color: black !important;
+    color: white !important;
     font-weight: bold !important;
 }
 
