@@ -38,18 +38,39 @@ p, label, span, div,
     font-weight: bold !important;
 }
 
-/* Custom CSS untuk mengubah Background Selectbox (Dropdown) menjadi Gradasi Biru Muda */
+/* ── KOTAK UTAMA SELECTBOX (DROPDOWN) GRADASI BIRU MUDA ── */
 div[data-baseweb="select"] > div {
-    background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%) !important;
-    border: 1px solid #4fc3f7 !important;
+    background: linear-gradient(135deg, #0b3c5d 0%, #328cc1 100%) !important;
+    border: 2px solid #328cc1 !important;
     border-radius: 8px !important;
 }
 
-/* Memastikan teks pilihan di dalam Dropdown berwarna gelap agar kontras & terbaca */
+/* Memastikan teks pilihan utama di dalam Dropdown berwarna putih agar kontras */
 div[data-baseweb="select"] span, 
 div[data-baseweb="select"] div {
-    color: #0b3c5d !important;
+    color: white !important;
     font-weight: bold !important;
+}
+
+/* ── MENGUBAH LIST PILIHAN DI DALAM DROPDOWN SAAT DIKLIK (GRADASI BIRU) ── */
+div[role="listbox"] ul {
+    background: linear-gradient(135deg, #0b3c5d 0%, #1d5f8a 100%) !important;
+    border: 1px solid #328cc1 !important;
+    padding: 0 !important;
+}
+
+/* Mengatur tiap baris pilihan (List Item) di dalam dropdown */
+div[role="listbox"] li {
+    color: white !important;
+    font-weight: bold !important;
+    background: transparent !important;
+    padding: 10px 15px !important;
+}
+
+/* Efek ketika kursor diarahkan (hover) pada pilihan dropdown */
+div[role="listbox"] li:hover {
+    background: #328cc1 !important;
+    color: white !important;
 }
 
 /* Tabel markdown */
