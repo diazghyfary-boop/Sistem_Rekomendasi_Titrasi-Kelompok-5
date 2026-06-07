@@ -23,25 +23,17 @@ page_bg_img = """
 
 /* Memaksa semua teks di luar box berwarna hitam tebal */
 h1, h2, h3, h4, h5, h6,
-p, label, span, div,
-.stMarkdown,
-.stText,
-.stRadio label,
-.stSelectbox label {
-    color: black !important;
-    font-weight: bold !important;
-}
-
-.stRadio label {
+p, label, .stMarkdown, .stText, .stRadio label, .stSelectbox label {
     color: black !important;
     font-weight: bold !important;
 }
 
 /* ─────────────────────────────────────────────────────────────
-   🎯 FIX TOTAL DROPDOWN (SELECTBOX) - ANTI BLACK SCREEN / DARK MODE HP
+   🎯 FIX DROPDOWN & INPUT BOX - GRADASI BIRU & TEKS PUTIH
    ───────────────────────────────────────────────────────────── */
 
-/* 1. Kotak Utama Selectbox Sebelum Diklik (Gradasi Biru) */
+/* ==================== 1. SELECTBOX (DROPDOWN) ==================== */
+/* Kotak Utama Selectbox Sebelum Diklik (Gradasi Biru) */
 div[data-baseweb="select"] > div {
     background: linear-gradient(135deg, #0b3c5d 0%, #328cc1 100%) !important;
     border: 2px solid #328cc1 !important;
@@ -55,19 +47,18 @@ div[data-baseweb="select"] div {
     font-weight: bold !important;
 }
 
-/* 2. MEROMBAK DAFTAR PILIHAN SAAT DIKLIK (MEMAKSA JADI GRADASI BIRU) */
-/* Menargetkan komponen dasar menu popover Streamlit */
+/* Daftar pilihan saat diklik (Menu Popover) */
 div[data-baseweb="popover"] ul,
 div[role="listbox"],
 [data-baseweb="menu"],
 [data-baseweb="menu"] ul {
     background: linear-gradient(135deg, #0b3c5d 0%, #1d5f8a 100%) !important;
-    background-color: #0b3c5d !important; /* Cadangan jika gradasi gagal */
+    background-color: #0b3c5d !important;
     border: 2px solid #328cc1 !important;
     border-radius: 8px !important;
 }
 
-/* 3. Memaksa Semua Baris Opsi Pilihan di Dalamnya Berwarna Putih Terang & Tebal */
+/* Baris Opsi Pilihan di Dalam Dropdown (Tampilan Awal & Diklik) */
 div[role="option"],
 div[role="option"] span,
 div[role="option"] div,
@@ -79,7 +70,7 @@ li[role="option"] span {
     font-size: 14px !important;
 }
 
-/* 4. Efek ketika opsi disorot / disentuh jari (Hover) - Berubah Biru Terang */
+/* Efek ketika opsi dropdown disorot/hover (Hover) */
 div[role="option"]:hover,
 div[role="option"]:active,
 li[role="option"]:hover,
@@ -90,6 +81,35 @@ div[data-baseweb="popover"] ul li:hover {
     color: white !important;
 }
 
+
+/* ==================== 2. NUMBER INPUT BOX ==================== */
+/* Kotak Utama Input Nilai (Gradasi Biru) */
+div[data-baseweb="input"] {
+    background: linear-gradient(135deg, #0b3c5d 0%, #328cc1 100%) !important;
+    border: 2px solid #328cc1 !important;
+    border-radius: 8px !important;
+}
+
+/* Mengubah background bagian dalam input agar transparan mengikuti gradasi */
+div[data-baseweb="input"] input {
+    background-color: transparent !important;
+    color: white !important; /* Teks angka saat dimasukkan berwarna putih */
+    font-weight: bold !important;
+}
+
+/* Memastikan teks nilai berwarna putih saat posisi fokus/diklik */
+div[data-baseweb="input"] input:focus {
+    color: white !important;
+}
+
+/* Memaksa tombol plus/minus (+ dan -) bawaan Streamlit berwarna putih */
+div[data-baseweb="input"] button {
+    color: white !important;
+    background-color: transparent !important;
+}
+
+
+/* ==================== 3. KONTEN LAINNYA ==================== */
 /* Lapisan putih transparan di tengah agar teks konten mudah dibaca */
 .main .block-container {
     background: rgba(255,255,255,0.45);
@@ -295,13 +315,13 @@ if fitur == "MENGHITUNG STANDARISASI LARUTAN":
         volume = st.number_input("Volume NaOH (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                BE = 63  
+                BE = 63.0  
                 N = massa / ((100 / 25) * volume * BE)
-                st.write("Rumus:")
-                st.write("N = massa Asam Oksalat(mg) / ((100mL/25mL) × volume NaOH (mL) × BE Asam Oksalat(mg/mgrek))")
-                st.write("Perhitungan:")
-                st.write(f"N = {massa:.1f} mg / ((100mL/25mL) × {volume:.2f} mL × {BE} mg/mgrek)")
-                st.success(f"Normalitas NaOH = {N:.4f} mgrek/mL atau {N:.4f} N")
+                st.write("**Rumus:**")
+                st.code("N = massa Asam Oksalat (mg) / ((100mL / 25mL) × volume NaOH (mL) × BE Asam Oksalat)")
+                st.write("**Perhitungan:**")
+                st.write(f"N = {massa:.1f} mg / (4 × {volume:.2f} mL × {BE} mg/mgrek)")
+                st.success(f"Normalitas NaOH = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
 
@@ -312,26 +332,26 @@ if fitur == "MENGHITUNG STANDARISASI LARUTAN":
             if volume > 0:
                 BE = 190.7  
                 N = massa / ((100 / 25) * volume * BE)
-                st.write("Rumus:")
-                st.write("N = massa boraks(mg) / ((100mL/25mL) × volume HCl(mL) × BE Boraks(mg/mgrek))")
-                st.write("Perhitungan:")
-                st.write(f"N = {massa:.1f} mg / ((100mL/25mL) × {volume:.2f} mL × {BE} mg/mgrek)")
-                st.success(f"Normalitas HCl = {N:.4f} mgrek/mL atau {N:.4f} N")
+                st.write("**Rumus:**")
+                st.code("N = massa Boraks (mg) / ((100mL / 25mL) × volume HCl (mL) × BE Boraks)")
+                st.write("**Perhitungan:**")
+                st.write(f"N = {massa:.1f} mg / (4 × {volume:.2f} mL × {BE} mg/mgrek)")
+                st.success(f"Normalitas HCl = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
 
     elif metode == "Kalium Permanganat (KMnO₄) dengan Asam Oksalat (H₂C₂O₄)":
         massa = st.number_input("Massa Asam Oksalat (mg)", min_value=0.0, format="%.1f")
-        volume = st.number_input("Volume KMnO4 (mL)", min_value=0.0, format="%.2f")
+        volume = st.number_input("Volume KMnO₄ (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
-                BE = 63  
+                BE = 63.0  
                 N = massa / ((100 / 25) * volume * BE)
-                st.write("Rumus:")
-                st.write("Normalitas KMnO₄ = massa Asam Oksalat (mg) / ((100mL/25mL) × volume KMnO₄ (mL) × BE Asam Oksalat(mg/mgrek))")
-                st.write("Perhitungan:")
-                st.write(f"N = {massa:.1f} mg / ((100mL/25mL) × {volume:.2f} mL × {BE} mg/mgrek)")
-                st.success(f"Normalitas KMnO₄ = {N:.4f} mgrek/mL atau {N:.4f} N")
+                st.write("**Rumus:**")
+                st.code("N = massa Asam Oksalat (mg) / ((100mL / 25mL) × volume KMnO₄ (mL) × BE Asam Oksalat)")
+                st.write("**Perhitungan:**")
+                st.write(f"N = {massa:.1f} mg / (4 × {volume:.2f} mL × {BE} mg/mgrek)")
+                st.success(f"Normalitas KMnO₄ = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
 
@@ -341,27 +361,27 @@ if fitur == "MENGHITUNG STANDARISASI LARUTAN":
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
                 BE = 49.04  
-                N = massa / (volume * BE)
-                st.write("Rumus:")
-                st.write("Normalitas Na₂S₂O₃ = massa Kalium Dikromat (mg) / ((100mL/25mL) × volume Tiosulfat (mL) × BE Kalium Dikromat (mg/mgrek))")
-                st.write("Perhitungan:")
-                st.write(f"N = {massa:.1f} mg / ((100mL/25mL) × {volume:.2f} mL × {BE} mg/mgrek)")
-                st.success(f"Normalitas Na₂S₂O₃ = {N:.4f} mgrek/mL atau {N:.4f} N")
+                N = massa / ((100 / 25) * volume * BE)
+                st.write("**Rumus:**")
+                st.code("N = massa K₂Cr₂O₇ (mg) / ((100mL / 25mL) × volume Tiosulfat (mL) × BE K₂Cr₂O₇)")
+                st.write("**Perhitungan:**")
+                st.write(f"N = {massa:.1f} mg / (4 × {volume:.2f} mL × {BE} mg/mgrek)")
+                st.success(f"Normalitas Na₂S₂O₃ = {N:.4f} N")
             else:
                 st.error("Volume tidak boleh 0.")
 
     elif metode == "EDTA (C₁₀H₁₆N₂O₈) dengan Kalium Karbonat (CaCO₃)":
-        massa = st.number_input("Massa CaCO₃  (mg)", min_value=0.0, format="%.1f")
+        massa = st.number_input("Massa CaCO₃ (mg)", min_value=0.0, format="%.1f")
         volume = st.number_input("Volume EDTA (mL)", min_value=0.0, format="%.2f")
         if st.button("Hitung Konsentrasi"):
             if volume > 0:
                 BM = 100.09  
                 M = massa / ((100 / 25) * volume * BM)
-                st.write("Rumus:")
-                st.write("Normalitas EDTA = massa CaCO₃ (mg) / ((100mL/25mL) × volume EDTA (mL) × BM CaCO₃ (mg/mmol))") 
-                st.write("Perhitungan:")
-                st.write(f"N = {massa:.1f} mg / ((100mL/25mL) × {volume:.2f} mL × {BM} mg/mgrek)")
-                st.success(f"Molaritas EDTA = {M:.4f} mmol/mL atau {M:.4f} M")
+                st.write("**Rumus:**")
+                st.code("M = massa CaCO₃ (mg) / ((100mL / 25mL) × volume EDTA (mL) × BM CaCO₃)") 
+                st.write("**Perhitungan:**")
+                st.write(f"M = {massa:.1f} mg / (4 × {volume:.2f} mL × {BM} mg/mmol)")
+                st.success(f"Molaritas EDTA = {M:.4f} M")
             else:
                 st.error("Volume tidak boleh 0.")
 
