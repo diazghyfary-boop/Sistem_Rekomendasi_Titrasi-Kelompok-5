@@ -21,7 +21,7 @@ page_bg_img = """
     background-attachment: fixed;
 }
 
-/* Semua tulisan di luar box/card */
+/* Memaksa semua teks di luar box berwarna hitam tebal */
 h1, h2, h3, h4, h5, h6,
 p, label, span, div,
 .stMarkdown,
@@ -32,45 +32,69 @@ p, label, span, div,
     font-weight: bold !important;
 }
 
-/* Radio button text */
 .stRadio label {
     color: black !important;
     font-weight: bold !important;
 }
 
-/* ── KOTAK UTAMA SELECTBOX (DROPDOWN) GRADASI BIRU MUDA ── */
+/* ─────────────────────────────────────────────────────────────
+   🎯 FIX TOTAL DROPDOWN (SELECTBOX) - ANTI BLACK SCREEN / DARK MODE HP
+   ───────────────────────────────────────────────────────────── */
+
+/* 1. Kotak Utama Selectbox Sebelum Diklik (Gradasi Biru) */
 div[data-baseweb="select"] > div {
     background: linear-gradient(135deg, #0b3c5d 0%, #328cc1 100%) !important;
     border: 2px solid #328cc1 !important;
     border-radius: 8px !important;
 }
 
-/* Memastikan teks pilihan utama di dalam Dropdown berwarna putih agar kontras */
+/* Teks di dalam kotak utama sebelum diklik (Warna Putih) */
 div[data-baseweb="select"] span, 
 div[data-baseweb="select"] div {
     color: white !important;
     font-weight: bold !important;
 }
 
-/* ── MENGUBAH LIST PILIHAN DI DALAM DROPDOWN SAAT DIKLIK (GRADASI BIRU) ── */
-div[role="listbox"] ul {
+/* 2. MEROMBAK DAFTAR PILIHAN SAAT DIKLIK (MEMAKSA JADI GRADASI BIRU) */
+/* Menargetkan komponen dasar menu popover Streamlit */
+div[data-baseweb="popover"] ul,
+div[role="listbox"],
+[data-baseweb="menu"],
+[data-baseweb="menu"] ul {
     background: linear-gradient(135deg, #0b3c5d 0%, #1d5f8a 100%) !important;
-    border: 1px solid #328cc1 !important;
-    padding: 0 !important;
+    background-color: #0b3c5d !important; /* Cadangan jika gradasi gagal */
+    border: 2px solid #328cc1 !important;
+    border-radius: 8px !important;
 }
 
-/* Mengatur tiap baris pilihan (List Item) di dalam dropdown */
-div[role="listbox"] li {
+/* 3. Memaksa Semua Baris Opsi Pilihan di Dalamnya Berwarna Putih Terang & Tebal */
+div[role="option"],
+div[role="option"] span,
+div[role="option"] div,
+li[role="option"],
+li[role="option"] span {
     color: white !important;
+    background-color: transparent !important;
     font-weight: bold !important;
-    background: transparent !important;
-    padding: 10px 15px !important;
+    font-size: 14px !important;
 }
 
-/* Efek ketika kursor diarahkan (hover) pada pilihan dropdown */
-div[role="listbox"] li:hover {
+/* 4. Efek ketika opsi disorot / disentuh jari (Hover) - Berubah Biru Terang */
+div[role="option"]:hover,
+div[role="option"]:active,
+li[role="option"]:hover,
+li[role="option"]:focus,
+div[data-baseweb="popover"] ul li:hover {
+    background-color: #328cc1 !important;
     background: #328cc1 !important;
     color: white !important;
+}
+
+/* Lapisan putih transparan di tengah agar teks konten mudah dibaca */
+.main .block-container {
+    background: rgba(255,255,255,0.45);
+    padding: 2rem;
+    border-radius: 15px;
 }
 
 /* Tabel markdown */
@@ -83,13 +107,6 @@ table, th, td {
 .stInfo {
     color: black !important;
     font-weight: bold !important;
-}
-
-/* Lapisan putih transparan di tengah agar teks konten mudah dibaca */
-.main .block-container {
-    background: rgba(255,255,255,0.45);
-    padding: 2rem;
-    border-radius: 15px;
 }
 
 </style>
@@ -106,7 +123,6 @@ st.markdown(
     <style>
         body { font-family: 'Segoe UI', sans-serif; }
         
-        /* Warna teks khusus di dalam Banner Atas */
         .banner h1 {
             color: #0b3c5d !important; 
             font-weight: bold !important;
@@ -118,7 +134,6 @@ st.markdown(
             font-weight: bold !important;
         }
 
-        /* Desain Banner Header Atas dengan Gradasi Biru Muda */
         .banner {
             background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%);
             border-radius: 14px;
@@ -127,13 +142,10 @@ st.markdown(
             margin-bottom: 28px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         }
-        .banner h1 { font-size: 2em; margin: 0 0 6px 0; }
-        .banner p  { font-size: 1em; margin: 0; }
 
-        /* Desain Kotak Rekomendasi (Cards) */
+        /* Kartu Rekomendasi Indikator */
         .card {
-            background: #ffffff;
-            color: #000000 !important;
+            background: #ffffff !important;
             border-radius: 12px;
             padding: 18px 20px;
             margin: 10px 0;
@@ -148,24 +160,14 @@ st.markdown(
         .card.yellow { border-color: #f9a825; }
         .card.teal   { border-color: #00897b; }
 
-        .card,
-        .card *,
-        .card h4,
-        .card p,
-        .card div,
-        .card span {
-            color: black !important;
+        /* Memaksa tulisan di dalam kartu SELALU HITAM */
+        .card, .card h4, .card p, .card span, .card li {
+            color: #000000 !important;
+            font-weight: bold !important;
         }
 
-        .card h4 {
-            margin: 0 0 6px 0;
-            font-size: 1.05em;
-        }
-
-        .card p {
-            margin: 2px 0;
-            font-size: .93em;
-        }
+        .card h4 { margin: 0 0 6px 0; font-size: 1.05em; }
+        .card p { margin: 2px 0; font-size: .93em; }
 
         .badge {
             display: inline-block;
@@ -178,7 +180,6 @@ st.markdown(
             margin-top: 6px;
         }
 
-        /* Warning box */
         .warn {
             background: #fff3e0;
             border-left: 5px solid #FF9800;
@@ -186,15 +187,15 @@ st.markdown(
             padding: 14px 16px;
             margin: 10px 0;
             font-size: .92em;
-            color: #5d4037;
+            color: #5d4037 !important;
         }
-        .warn b { color: #e65100; }
+        .warn b { color: #e65100 !important; }
+        .warn * { color: #5d4037 !important; }
 
-        /* Step badge */
         .step-badge {
             display: inline-block;
             background: #e8eaf6;
-            color: #3949ab;
+            color: #3949ab !important;
             border-radius: 20px;
             padding: 3px 14px;
             font-size: .82em;
@@ -202,13 +203,12 @@ st.markdown(
             margin-bottom: 12px;
         }
 
-        /* Done banner */
         .done {
             background: linear-gradient(90deg,#e8f5e9,#f1f8e9);
             border: 1.5px solid #a5d6a7;
             border-radius: 10px;
             padding: 14px 18px;
-            color: #2e7d32;
+            color: #2e7d32 !important;
             font-weight: 600;
             margin-top: 14px;
             text-align: center;
@@ -237,7 +237,6 @@ st.markdown(
 # ─────────────────────────────────────────────
 
 def card(title, rows: list, color="", starred=False):
-    """Render a styled indicator card."""
     extra = f' <span class="badge">⭐ Direkomendasikan</span>' if starred else ""
     body = "".join(f"<p>• {r}</p>" for r in rows)
     st.markdown(
