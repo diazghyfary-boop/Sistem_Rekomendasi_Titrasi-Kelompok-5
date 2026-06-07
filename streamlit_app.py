@@ -76,6 +76,18 @@ st.markdown(
     <style>
         /* ── global ── */
         body { font-family: 'Segoe UI', sans-serif; }
+        
+    /* KHUSUS BANNER */
+.banner h1 {
+    color: white !important;
+    font-weight: bold !important;
+    font-size: 2em;
+}
+
+.banner p {
+    color: #d6e4ff !important;
+    font-weight: normal !important;
+}
 
         /* ── header banner ── */
         .banner {
