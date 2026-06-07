@@ -8,21 +8,65 @@ st.set_page_config(
     page_icon="🥉",
     layout="centered",
 )
-
-st.image("IMAGE KIMIA.jpeg")
-
 page_bg_img = """
 <style>
+
+/* Background */
 .stApp {
     background-image: url("https://raw.githubusercontent.com/diazghyfary-boop/proyekdiaz137/main/IMAGE%20KIMIA.jpeg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
+
+/* Semua tulisan di luar box */
+h1, h2, h3, h4, h5, h6,
+p, label, span, div,
+.stMarkdown,
+.stText,
+.stRadio label,
+.stSelectbox label {
+    color: black !important;
+    font-weight: bold !important;
+}
+
+/* Radio button */
+.stRadio label {
+    color: black !important;
+    font-weight: bold !important;
+}
+
+/* Selectbox */
+.stSelectbox div {
+    color: black !important;
+    font-weight: bold !important;
+}
+
+/* Tabel markdown */
+table, th, td {
+    color: black !important;
+    font-weight: bold !important;
+}
+
+/* Kotak info */
+.stInfo {
+    color: black !important;
+    font-weight: bold !important;
+}
+
+/* Tambahkan lapisan putih transparan agar tulisan mudah dibaca */
+.main .block-container {
+    background: rgba(255,255,255,0.45);
+    padding: 2rem;
+    border-radius: 15px;
+}
+
 </style>
 """
 
 st.markdown(page_bg_img, unsafe_allow_html=True)
+
 
 # ─────────────────────────────────────────────
 # CUSTOM CSS
