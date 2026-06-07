@@ -224,8 +224,9 @@ st.markdown(
 st.markdown(
     """
     <div class="banner">
-        <h1>👩🏻‍🔬 Sistem Rekomendasi Indikator Titrasi</h1>
-        <p>Pilih jenis titrasi → ikuti langkah → dapatkan rekomendasi indikator</p>
+        <h1>👩🏻‍🔬 Sistem Rekomendasi Titrasi</h1>
+        <p>Pilih jenis titrasi → Ikuti langkah → Dapatkan rekomendasi indikator</p>
+        <p>Pilih jenis metode standarisasi → Masukkan nilainya → Dapatkan hasil perhitungannya</p>
     </div>
     """,
     unsafe_allow_html=True,
