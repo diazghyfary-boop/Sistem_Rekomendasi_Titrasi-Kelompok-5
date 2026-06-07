@@ -1,5 +1,5 @@
 import streamlit as st
-import base64 
+
 # ─────────────────────────────────────────────
 # PAGE CONFIG
 # ─────────────────────────────────────────────
@@ -10,25 +10,20 @@ st.set_page_config(
 )
 
 def get_base64(bin_file):
-    with open(bin_file, "rb") as f:
-        data = f.read()
-    return base64.b64encode(data).decode()
-
-img = get_base64("IMAGE KIMIA.jpeg")
 st.image("IMAGE KIMIA.jpeg")
 
-page_bg_img = f"""
+page_bg_img = """
 <style>
 .stApp {
-    background-image: url("https://github.com/diazghyfary-boop/proyekdiaz137/blob/0c1193e66b4b5e2781efe11468e64f915f3bc246/IMAGE%20KIMIA.jpeg;base64,{img}");
+    background-image: url("https://raw.githubusercontent.com/diazghyfary-boop/proyekdiaz137/main/IMAGE%20KIMIA.jpeg");
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 </style>
 """
 
 st.markdown(page_bg_img, unsafe_allow_html=True)
-
 
 # ─────────────────────────────────────────────
 # CUSTOM CSS
