@@ -4,7 +4,7 @@ import streamlit as st
 # PAGE CONFIG
 # ─────────────────────────────────────────────
 st.set_page_config(
-    page_title="Sistem Rekomendasi Indikator Titrasi",
+    page_title="Sistem Rekomendasi Titrasi",
     page_icon="🥉",
     layout="centered",
 )
@@ -626,7 +626,7 @@ st.divider()
 st.markdown(
     """
     <div style='text-align:center; color:#999; font-size:.8em; margin-top:4px'>
-        🥉 Sistem Rekomendasi Indikator Titrasi &nbsp;|&nbsp; Kelompok 5
+        🥉 Sistem Rekomendasi Titrasi &nbsp;|&nbsp; Kelompok 5
     </div>
     """,
     unsafe_allow_html=True,
