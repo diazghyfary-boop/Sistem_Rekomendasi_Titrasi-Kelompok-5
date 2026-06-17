@@ -1,19 +1,18 @@
 import streamlit as st
 
-# ─────────────────────────────────────────────
-# PAGE CONFIG
-# ─────────────────────────────────────────────
+# =============================================
+# 1. PAGE CONFIG
+# =============================================
 st.set_page_config(
     page_title="Sistem Rekomendasi Titrasi",
     page_icon="⚛️",
     layout="centered",
 )
 
-# FIX: Mengubah URL GitHub 'blob' menjadi URL berkas mentah (raw) agar gambar muncul
-page_bg_img = """
-<style>
-
-/* Background Utama Aplikasi */
+# =============================================
+# 2. GLOBAL INJECTED CSS (BACKGROUND & TEXT)
+# =============================================
+page_bg_img = """<style>
 .stApp {
     background-image: url("https://raw.githubusercontent.com/diazghyfary-boop/proyekdiaz137/6095178605cf20666f82dd24e2ef5ab90b4c2495/Screenshot_20260617_213235_Gallery.jpg");
     background-size: cover;
@@ -21,31 +20,21 @@ page_bg_img = """
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
-
-/* Memaksa semua teks di luar box berwarna hitam tebal */
 h1, h2, h3, h4, h5, h6,
 p, label, .stMarkdown, .stText, .stRadio label, .stSelectbox label {
     color: black !important;
     font-weight: bold !important;
 }
-
-/* ─────────────────────────────────────────────────────────────
-   🎯 DROPDOWN & INPUT BOX - GRADASI BIRU & TEKS PUTIH
-   ───────────────────────────────────────────────────────────── */
-
-/* ==================== 1. SELECTBOX (DROPDOWN) ==================== */
 div[data-baseweb="select"] > div {
     background: linear-gradient(135deg, #0b3c5d 0%, #328cc1 100%) !important;
     border: 2px solid #328cc1 !important;
     border-radius: 8px !important;
 }
-
 div[data-baseweb="select"] span, 
 div[data-baseweb="select"] div {
     color: white !important;
     font-weight: bold !important;
 }
-
 div[data-baseweb="popover"] ul,
 div[role="listbox"],
 [data-baseweb="menu"],
@@ -55,7 +44,6 @@ div[role="listbox"],
     border: 2px solid #328cc1 !important;
     border-radius: 8px !important;
 }
-
 div[role="option"],
 div[role="option"] span,
 div[role="option"] div,
@@ -66,7 +54,6 @@ li[role="option"] span {
     font-weight: bold !important;
     font-size: 14px !important;
 }
-
 div[role="option"]:hover,
 div[role="option"]:active,
 li[role="option"]:hover,
@@ -76,48 +63,36 @@ div[data-baseweb="popover"] ul li:hover {
     background: #328cc1 !important;
     color: white !important;
 }
-
-
-/* ==================== 2. NUMBER INPUT BOX ==================== */
 div[data-baseweb="input"] {
     background: linear-gradient(135deg, #0b3c5d 0%, #328cc1 100%) !important;
     border: 2px solid #328cc1 !important;
     border-radius: 8px !important;
 }
-
 div[data-baseweb="input"] input {
     background-color: transparent !important;
     color: white !important; 
     font-weight: bold !important;
 }
-
 div[data-baseweb="input"] input:focus {
     color: white !important;
 }
-
 div[data-baseweb="input"] button {
     color: white !important;
     background-color: transparent !important;
 }
-
-
-/* ==================== 3. KONTEN LAINNYA ==================== */
 .main .block-container {
     background: rgba(255,255,255,0.45);
     padding: 2rem;
     border-radius: 15px;
 }
-
 table, th, td {
     color: black !important;
     font-weight: bold !important;
 }
-
 .stInfo {
     color: black !important;
     font-weight: bold !important;
 }
-
 .custom-white-box {
     background-color: rgba(255, 255, 255, 0.9) !important;
     padding: 15px;
@@ -126,135 +101,112 @@ table, th, td {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-
-</style>
-"""
+</style>"""
 
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
+# =============================================
+# 3. INTERFACE & LAYOUT CSS
+# =============================================
+ui_css = """<style>
+body { font-family: 'Segoe UI', sans-serif; }
+.banner h1 {
+    color: #0b3c5d !important; 
+    font-weight: bold !important;
+    font-size: 2em;
+}
+.banner p {
+    color: #328cc1 !important; 
+    font-weight: bold !important;
+}
+.banner {
+    background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%);
+    border-radius: 14px;
+    padding: 28px 20px;
+    text-align: center;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+.card {
+    background: #ffffff !important;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 10px 0;
+    border-left: 6px solid #2196F3;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.card.red    { border-color: #e53935; }
+.card.green  { border-color: #43a047; }
+.card.orange { border-color: #fb8c00; }
+.card.purple { border-color: #8e24aa; }
+.card.yellow { border-color: #f9a825; }
+.card.teal   { border-color: #00897b; }
+.card, .card h4, .card p, .card span, .card li {
+    color: #000000 !important;
+    font-weight: bold !important;
+}
+.card h4 { margin: 0 0 6px 0; font-size: 1.05em; }
+.card p { margin: 2px 0; font-size: .93em; }
+.badge {
+    display: inline-block;
+    background: #fff8e1;
+    color: #000000 !important;
+    border: 1px solid #ffe082;
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-size: .8em;
+    margin-top: 6px;
+}
+.warn {
+    background: #fff3e0;
+    border-left: 5px solid #FF9800;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 10px 0;
+    font-size: .92em;
+    color: #5d4037 !important;
+}
+.warn b { color: #e65100 !important; }
+.warn * { color: #5d4037 !important; }
+.step-badge {
+    display: inline-block;
+    background: #e8eaf6;
+    color: #3949ab !important;
+    border-radius: 20px;
+    padding: 3px 14px;
+    font-size: .82em;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+.done {
+    background: linear-gradient(90deg,#e8f5e9,#f1f8e9);
+    border: 1.5px solid #a5d6a7;
+    border-radius: 10px;
+    padding: 14px 18px;
+    color: #2e7d32 !important;
+    font-weight: 600;
+    margin-top: 14px;
+    text-align: center;
+}
+</style>"""
 
-# ─────────────────────────────────────────────
-# CUSTOM CSS UNTUK BANNER DAN CARD
-# ─────────────────────────────────────────────
+st.markdown(ui_css, unsafe_allow_html=True)
+
+# =============================================
+# 4. BANNER ATAS
+# =============================================
 st.markdown(
-    """
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; }
-        
-        .banner h1 {
-            color: #0b3c5d !important; 
-            font-weight: bold !important;
-            font-size: 2em;
-        }
-
-        .banner p {
-            color: #328cc1 !important; 
-            font-weight: bold !important;
-        }
-
-        .banner {
-            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%);
-            border-radius: 14px;
-            padding: 28px 20px;
-            text-align: center;
-            margin-bottom: 28px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-        }
-
-        /* Kartu Rekomendasi Indikator */
-        .card {
-            background: #ffffff !important;
-            border-radius: 12px;
-            padding: 18px 20px;
-            margin: 10px 0;
-            border-left: 6px solid #2196F3;
-            box-shadow: 0 2px 8px rgba(0,0,0,.08);
-        }
-
-        .card.red    { border-color: #e53935; }
-        .card.green  { border-color: #43a047; }
-        .card.orange { border-color: #fb8c00; }
-        .card.purple { border-color: #8e24aa; }
-        .card.yellow { border-color: #f9a825; }
-        .card.teal   { border-color: #00897b; }
-
-        /* Memaksa tulisan di dalam kartu SELALU HITAM */
-        .card, .card h4, .card p, .card span, .card li {
-            color: #000000 !important;
-            font-weight: bold !important;
-        }
-
-        .card h4 { margin: 0 0 6px 0; font-size: 1.05em; }
-        .card p { margin: 2px 0; font-size: .93em; }
-
-        .badge {
-            display: inline-block;
-            background: #fff8e1;
-            color: #000000 !important;
-            border: 1px solid #ffe082;
-            border-radius: 20px;
-            padding: 2px 10px;
-            font-size: .8em;
-            margin-top: 6px;
-        }
-
-        .warn {
-            background: #fff3e0;
-            border-left: 5px solid #FF9800;
-            border-radius: 8px;
-            padding: 14px 16px;
-            margin: 10px 0;
-            font-size: .92em;
-            color: #5d4037 !important;
-        }
-        .warn b { color: #e65100 !important; }
-        .warn * { color: #5d4037 !important; }
-
-        .step-badge {
-            display: inline-block;
-            background: #e8eaf6;
-            color: #3949ab !important;
-            border-radius: 20px;
-            padding: 3px 14px;
-            font-size: .82em;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .done {
-            background: linear-gradient(90deg,#e8f5e9,#f1f8e9);
-            border: 1.5px solid #a5d6a7;
-            border-radius: 10px;
-            padding: 14px 18px;
-            color: #2e7d32 !important;
-            font-weight: 600;
-            margin-top: 14px;
-            text-align: center;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-# ─────────────────────────────────────────────
-# BANNER ATAS
-# ─────────────────────────────────────────────
-st.markdown(
-    """
-    <div class="banner">
+    """<div class="banner">
         <h1>👩🏻‍🔬 Sistem Rekomendasi Titrasi</h1>
         <p>Pilih jenis titrasi → Ikuti langkah → Dapatkan rekomendasi indikator</p>
         <p>Pilih jenis metode standarisasi → Masukkan nilainya → Dapatkan hasil perhitungannya</p>
-    </div>
-    """,
+    </div>""",
     unsafe_allow_html=True,
 )
 
-
-# ─────────────────────────────────────────────
-# HELPER FUNCTIONS
-# ─────────────────────────────────────────────
-
+# =============================================
+# 5. HELPER FUNCTIONS
+# =============================================
 def card(title, rows: list, color="", starred=False):
     extra = f' <span class="badge">⭐ Direkomendasikan</span>' if starred else ""
     body = "".join(f"<p>• {r}</p>" for r in rows)
@@ -273,9 +225,8 @@ def step(n, label):
     st.markdown(f'<div class="step-badge">Langkah {n}</div>', unsafe_allow_html=True)
     st.markdown(f"**{label}**")
 
-
 # =============================================
-# MENU UTAMA
+# 6. MENU UTAMA
 # =============================================
 st.markdown("### 🎯 Pilih Tujuan")
 
@@ -289,13 +240,11 @@ fitur = st.radio(
 
 st.divider()
 
-# ─────────────────────────────────────────────
-# FITUR 1 — STANDARISASI LARUTAN
-# ─────────────────────────────────────────────
+# =============================================
+# 7. FITUR — STANDARISASI LARUTAN
+# =============================================
 if fitur == "MENGHITUNG STANDARISASI LARUTAN":
-
     st.subheader("🧪 PERHITUNGAN STANDARISASI LARUTAN")
-
     metode = st.selectbox(
         "Pilih Metode Standarisasi",
         [
@@ -383,13 +332,11 @@ if fitur == "MENGHITUNG STANDARISASI LARUTAN":
             else:
                 st.error("Volume tidak boleh 0.")
 
-# ─────────────────────────────────────────────
-# FITUR 2 — MENENTUKAN INDIKATOR
-# ─────────────────────────────────────────────
+# =============================================
+# 8. FITUR — MENENTUKAN INDIKATOR
+# =============================================
 elif fitur == "MENENTUKAN INDIKATOR TITRASI":
-
     st.subheader("🧪 PILIH JENIS TITRASI")
-
     JENIS = [
         "── PILIH ──",
         "🔴 JENIS TITRASI ASAM-BASA",
@@ -398,13 +345,11 @@ elif fitur == "MENENTUKAN INDIKATOR TITRASI":
         "🟢 TITRASI ARGENTOMETRI",
     ]
     pilih_jenis = st.selectbox("Jenis Titrasi", JENIS, label_visibility="collapsed")
-
     st.divider()
 
     if pilih_jenis == "🔴 JENIS TITRASI ASAM-BASA":
         st.subheader("🔴 JENIS TITRASI ASAM-BASA")
         col1, col2 = st.columns(2)
-
         with col1:
             step(2, "JENIS TITRASI ASAM-BASA")
             titran = st.radio(
@@ -417,35 +362,21 @@ elif fitur == "MENENTUKAN INDIKATOR TITRASI":
                 ],
                 label_visibility="collapsed",
             )
-
         with col2:
             st.divider()
             st.subheader("💡 Rekomendasi Indikator")
-
             if titran == "Asam Kuat oleh Basa Kuat":
-                card("Bromtimol Biru", ["Rentang pH: 6.0 – 7.6",
-                     "Perubahan: Kuning → Biru", "Warna hijau akan muncul sebagai warna antara"], "teal", True)
-                card("Fenolftalein", ["Rentang pH: 8.2 – 10.0",
-                     "Perubahan: Tidak berwarna → Pink"], "red")
-
+                card("Bromtimol Biru", ["Rentang pH: 6.0 – 7.6", "Perubahan: Kuning → Biru"], "teal", True)
+                card("Fenolftalein", ["Rentang pH: 8.2 – 10.0", "Perubahan: Tidak berwarna → Pink"], "red")
             elif titran == "Basa Lemah oleh Asam Kuat":
-                card("Metil Jingga", ["Rentang pH: 3.1 – 4.4",
-                     "Perubahan: Kuning → Merah", "Sangat sesuai untuk titik ekuivalen yang bersifat asam"], "orange", True)
-                card("Metil Merah", ["Rentang pH: 4.2 – 6.2",
-                     "Perubahan: Kuning → Merah", "Warna jingga akan muncul sebagai warna antara"], "red")
-                warn("Fenolftalein tidak direkomendasikan karena perubahan warnanya terjadi pada daerah basa.")
-
+                card("Metil Jingga", ["Rentang pH: 3.1 – 4.4", "Perubahan: Kuning → Merah"], "orange", True)
+                card("Metil Merah", ["Rentang pH: 4.2 – 6.2", "Perubahan: Kuning → Merah"], "red")
+                warn("Fenolftalein tidak direkomendasikan karena perubahan warna terjadi di daerah basa.")
             elif titran == "Asam Lemah oleh Basa Kuat":
-                card("Fenolftalein", ["Rentang pH: 8.2 – 10.0",
-                     "Perubahan: Tidak berwarna → Pink",
-                     "pH ekuivalen > 7 → ideal"], "red", True)
-                warn("Jangan gunakan metil oranye, metil merah dan BTB — Pengamatan pada titik akhir akan kurang jelas karena trayek pH tidak sesuai dengan titik ekuivalen.")
-
+                card("Fenolftalein", ["Rentang pH: 8.2 – 10.0", "Perubahan: Tidak berwarna → Pink"], "red", True)
+                warn("Jangan gunakan metil oranye atau metil merah.")
             else:  
-                warn(
-                    "Titrasi asam lemah – basa lemah <b>tidak direkomendasikan</b> secara analitik "
-                    "karena tidak memiliki titik ekuivalen yang tajam, sehingga titik akhir titrasi sangat sulit dideteksi menggunakan indikator warna standar.")
-
+                warn("Titrasi asam lemah – basa lemah tidak direkomendasikan secara analitik.")
         done()
 
     elif pilih_jenis == "🟡 TITRASI REDOKS":
@@ -459,102 +390,37 @@ elif fitur == "MENENTUKAN INDIKATOR TITRASI":
         )
         st.divider()
         st.subheader("💡 Rekomendasi Indikator")
-
         if metode == "Permanganometri":
-            card("KMnO₄ — Autoindicator",
-                [
-                    "KMnO₄ sendiri bertindak sebagai indikator",
-                    "Titik akhir: larutan berubah merah muda",
-                    "Titrasi dalam suasana asam (H₂SO₄ encer)",
-                ], "purple", True)
+            card("KMnO₄ — Autoindicator", ["KMnO₄ bertindak sebagai indikator", "Titik akhir: larutan merah muda"], "purple", True)
             warn("Penggunaan blanko sangat dianjurkan untuk mengoreksi hasil titrasi.")
-            card(
-                "Ferroin (1,10-fenantrolin)",
-                [
-                    "Dalam keadaan tereduksi, kompleks ini berwarna merah pekat.",
-                    "Ketika dioksidasi, kompleks ini berubah menjadi berwarna biru pucat (atau biru).",
-                    "Perubahan warna ini bersifat reversibel",
-                ],
-                "red",
-            )
-
         else:  
-            card(
-                "Larutan Kanji (Amilum)",
-                [
-                    "Digunakan pada titrasi redoks yang melibatkan iodin (I₂)",
-                    "Perubahan: Biru → Tidak berwarna (saat I₂ habis)",
-                ],
-                "teal",
-                True,
-            )
-            warn(
-                "Tambahkan larutan kanji <b>menjelang titik akhir titrasi</b> (saat warna sudah pucat kuning), "
-                "bukan di awal — amilum yang berikatan terlalu lama dengan I₂ sulit terurai sehingga "
-                "titik akhir menjadi tidak tajam."
-            )
-
+            card("Larutan Kanji (Amilum)", ["Melibatkan iodin (I₂)", "Perubahan: Biru → Tidak berwarna"], "teal", True)
+            warn("Tambahkan larutan kanji menjelang titik akhir titrasi (saat warna sudah kuning pucat).")
         done()
 
     elif pilih_jenis == "🟣 TITRASI KOMPLEKSOMETRI":
         st.subheader("🟣 TITRASI KOMPLEKSOMETRI (EDTA)")
         step(2, "Pilih Ion Logam yang Dititrasi")
-
         ION_DATA = {
-            "Ca²⁺ / Mg²⁺": [
-                ("EBT (Eriochrome Black T)", ["pH 10 — buffer amonia/amonium klorida",
-                 "Perubahan: Merah anggur → Biru"], "teal", True),
-            ],
-            "Zn²⁺": [
-                ("EBT (Eriochrome Black T)", ["pH 10 — buffer amonia",
-                 "Perubahan: Merah anggur → Biru"], "teal", True),
-            ],
-            "Cu²⁺": [
-                ("Murexide", ["pH 8–9", "Perubahan: Kuning → Ungu"], "purple", True),
-            ],
+            "Ca²⁺ / Mg²⁺": [("EBT", ["pH 10 — buffer amonia", "Perubahan: Merah anggur → Biru"], "teal", True)],
+            "Zn²⁺": [("EBT", ["pH 10 — buffer amonia", "Perubahan: Merah anggur → Biru"], "teal", True)],
+            "Cu²⁺": [("Murexide", ["pH 8–9", "Perubahan: Kuning → Ungu"], "purple", True)],
             "Fe²⁺ / Fe³⁺": [
-                ("Asam salisilat", ["pH 1–2 (untuk Fe³⁺ — suasana sangat asam)",
-                 "Perubahan: Merah → Tidak berwarna"], "red", True),
-                ("Tiron", ["pH 4–10", "Perubahan: Biru → Tidak berwarna"], "teal", False),
+                ("Asam salisilat", ["pH 1–2", "Perubahan: Merah → Tidak berwarna"], "red", True),
+                ("Tiron", ["pH 4–10", "Perubahan: Biru → Tidak berwarna"], "teal", False)
             ],
-            "Pb²⁺": [
-                ("Xylenol Orange", ["pH 5–6 — buffer heksamin",
-                 "Perubahan: Merah-ungu → Kuning"], "orange", True),
-            ],
-            "Hg²⁺": [
-                ("Xylenol Orange", ["pH 2–3 (asam nitrat encer)",
-                 "Perubahan: Merah → Kuning"], "orange", True),
-            ],
-            "Al³⁺": [
-                ("Xylenol Orange + titrasi balik", ["pH 5",
-                 "Perubahan: Kuning → Merah-ungu"], "orange", True),
-            ],
-            "Ni²⁺": [
-                ("Murexide", ["pH 8–9 — buffer amonia",
-                 "Perubahan: Kuning → Ungu"], "purple", True),
-            ],
-            "Co²⁺": [
-                ("Murexide", ["pH 8–9 — buffer amonia",
-                 "Perubahan: Kuning → Ungu"], "purple", True),
-            ],
+            "Pb²⁺": [("Xylenol Orange", ["pH 5–6", "Perubahan: Merah-ungu → Kuning"], "orange", True)],
+            "Hg²⁺": [("Xylenol Orange", ["pH 2–3", "Perubahan: Merah → Kuning"], "orange", True)],
+            "Al³⁺": [("Xylenol Orange + titrasi balik", ["pH 5", "Perubahan: Kuning → Merah-ungu"], "orange", True)],
+            "Ni²⁺": [("Murexide", ["pH 8–9", "Perubahan: Kuning → Ungu"], "purple", True)],
+            "Co²⁺": [("Murexide", ["pH 8–9", "Perubahan: Kuning → Ungu"], "purple", True)],
         }
-
-        ion = st.selectbox(
-            "Ion Logam",
-            ["── Pilih Ion Logam ──"] + list(ION_DATA.keys()),
-            label_visibility="collapsed",
-        )
-
+        ion = st.selectbox("Ion Logam", ["── Pilih Ion Logam ──"] + list(ION_DATA.keys()), label_visibility="collapsed")
         if ion != "── Pilih Ion Logam ──":
             st.divider()
-            st.subheader(f"💡 Rekomendasi Indikator untuk **{ion}**")
+            st.subheader(f"💡 Rekomendasi Indikator untuk {ion}")
             for name, rows, color, starred in ION_DATA[ion]:
                 card(name, rows, color, starred)
-            warn(
-                "Titrasi kompleksometri umumnya menggunakan <b>EDTA (Na₂H₂Y)</b> sebagai titran. "
-                "Pastikan pH larutan sesuai agar kompleks logam-indikator terbentuk dan terlepas dengan baik "
-                "di titik akhir."
-            )
             done()
 
     elif pilih_jenis == "🟢 TITRASI ARGENTOMETRI":
@@ -568,84 +434,48 @@ elif fitur == "MENENTUKAN INDIKATOR TITRASI":
         )
         st.divider()
         st.subheader("💡 Rekomendasi Indikator")
-
         if metode == "Argentometri (Mohr)":
-            card(
-                "Kalium Kromat — K₂CrO₄",
-                [
-                    "Kondisi: pH 6.5 – 10,0 (netral – sedikit basa)",
-                    "Titik akhir: endapan merah bata (Ag₂CrO₄) permanen",
-                    "Analit: halida, CN⁻, dan CNS",
-                ], "yellow", True)
-            warn(
-                "Tidak dapat digunakan dalam suasana asam karena CrO₄²⁻ akan berubah menjadi Cr₂O₇²⁻. "
-                "Tidak dapat digunakan dalam suasana basa karena akan terbentuk endapan AgOH.")
-
+            card("Kalium Kromat — K₂CrO₄", ["Kondisi: pH 6.5 – 10,0", "Titik akhir: endapan merah bata"], "yellow", True)
         elif metode == "Argentometri (Volhard)":
-            card(
-                "Besi(III) Amonium Sulfat — NH₄Fe(SO₄)₂",
-                [
-                    "Kondisi: suasana asam (HNO₃ 4N)",
-                    "Titik akhir: larutan berwarna merah (FeSCN²⁺) permanen",
-                    "Analit: Ag⁺, Cl⁻, Br⁻, I⁻",
-                ],
-                "red",
-                True,
-            )
-            warn(
-                "Untuk penetapan Cl⁻ secara tidak langsung, endapan AgCl harus disaring atau ditambahkan "
-                "pelarut organik agar SCN⁻ tidak bereaksi dengan AgCl."
-            )
-
+            card("Besi(III) Amonium Sulfat", ["Kondisi: suasana asam", "Titik akhir: larutan berwarna merah"], "red", True)
         else:  
-            card(
-                "Diklorofluoresein",
-                [
-                    "Kondisi: pH 4 – 10",
-                    "Titik akhir: endapan putih → merah muda",
-                    "Analit: Cl⁻, Br⁻, I⁻",
-                ],
-                "green",
-                True,
-            )
-            card(
-                "Fluoresein",
-                [
-                    "Kondisi: pH 7 – 8,5 (netral – sedikit basa)",
-                    "Titik akhir: endapan putih → merah muda",
-                    "Analit: Cl⁻",
-                ],
-                "green",
-            )
-            warn(
-                "Indikator adsorpsi (fluoresein/diklorofluoresein) bekerja dengan cara teradsorpsi pada "
-                "permukaan endapan AgX."
-            )
-
+            card("Diklorofluoresein", ["Kondisi: pH 4 – 10", "Titik akhir: endapan merah muda"], "green", True)
+            card("Fluoresein", ["Kondisi: pH 7 – 8,5", "Titik akhir: endapan merah muda"], "green")
         done()
 
     else:
         st.info("👆 Pilih jenis titrasi di atas untuk memulai.", icon="⚠️")
-        
         st.markdown(
-            """
-            <div class="custom-white-box">
-                <p style="margin-bottom: 8px; color: black !important; font-weight: bold !important;">Panduan singkat:</p>
+            """<div class="custom-white-box">
+                <p>Panduan singkat:</p>
                 <table style="width:100%; border-collapse: collapse;">
                     <thead>
                         <tr style="border-bottom: 2px solid black;">
-                            <th style="text-align:left; padding: 8px; color: black !important; font-weight: bold !important;">Jenis</th>
-                            <th style="text-align:left; padding: 8px; color: black !important; font-weight: bold !important;">Titran</th>
-                            <th style="text-align:left; padding: 8px; color: black !important; font-weight: bold !important;">Contoh Analit</th>
+                            <th style="padding: 8px;">Jenis</th>
+                            <th style="padding: 8px;">Titran</th>
+                            <th style="padding: 8px;">Contoh Analit</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="border-bottom: 1px solid #ddd;">
-                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">Asam-Basa</td>
-                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">NaOH / HCl</td>
-                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">CH₃COOH, Na₂CO₃</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #ddd;">
-                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">Redoks</td>
-                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">KMnO₄ / Na₂S₂O₃</td>
-                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">Fe²⁺, Cl⁻
+                        <tr><td style="padding: 8px;">Asam-Basa</td><td style="padding: 8px;">NaOH / HCl</td><td style="padding: 8px;">CH₃COOH</td></tr>
+                        <tr><td style="padding: 8px;">Redoks</td><td style="padding: 8px;">KMnO₄</td><td style="padding: 8px;">Fe²⁺</td></tr>
+                        <tr><td style="padding: 8px;">Kompleksometri</td><td style="padding: 8px;">EDTA</td><td style="padding: 8px;">Ca²⁺, Mg²⁺</td></tr>
+                        <tr><td style="padding: 8px;">Pengendapan</td><td style="padding: 8px;">AgNO₃</td><td style="padding: 8px;">Cl⁻</td></tr>
+                    </tbody>
+                </table>
+            </div>""",
+            unsafe_allow_html=True
+        )
+
+# =============================================
+# 9. FOOTER
+# =============================================
+st.divider()
+st.markdown(
+    """<div class="custom-white-box" style="text-align:center; max-width: 400px; margin: 0 auto;">
+        <span style='color: #000000 !important; font-weight: 900 !important; font-size: .9em;'>
+            ⚛️ Sistem Rekomendasi Titrasi &nbsp;|&nbsp; Kelompok 5
+        </span>
+    </div>""",
+    unsafe_allow_html=True,
+)
