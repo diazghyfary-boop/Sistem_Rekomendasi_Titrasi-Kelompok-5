@@ -9,12 +9,13 @@ st.set_page_config(
     layout="centered",
 )
 
+# FIX: Mengubah URL GitHub 'blob' menjadi URL berkas mentah (raw) agar gambar muncul
 page_bg_img = """
 <style>
 
 /* Background Utama Aplikasi */
 .stApp {
-    background-image: url("https://raw.githubusercontent.com/diazghyfary-boop/proyekdiaz137/blob/6095178605cf20666f82dd24e2ef5ab90b4c2495/Screenshot_20260617_213235_Gallery.jpg");
+    background-image: url("https://raw.githubusercontent.com/diazghyfary-boop/proyekdiaz137/6095178605cf20666f82dd24e2ef5ab90b4c2495/Screenshot_20260617_213235_Gallery.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -33,21 +34,18 @@ p, label, .stMarkdown, .stText, .stRadio label, .stSelectbox label {
    ───────────────────────────────────────────────────────────── */
 
 /* ==================== 1. SELECTBOX (DROPDOWN) ==================== */
-/* Kotak Utama Selectbox Sebelum Diklik (Gradasi Biru) */
 div[data-baseweb="select"] > div {
     background: linear-gradient(135deg, #0b3c5d 0%, #328cc1 100%) !important;
     border: 2px solid #328cc1 !important;
     border-radius: 8px !important;
 }
 
-/* Teks di dalam kotak utama sebelum diklik (Warna Putih) */
 div[data-baseweb="select"] span, 
 div[data-baseweb="select"] div {
     color: white !important;
     font-weight: bold !important;
 }
 
-/* Daftar pilihan saat diklik (Menu Popover) */
 div[data-baseweb="popover"] ul,
 div[role="listbox"],
 [data-baseweb="menu"],
@@ -58,7 +56,6 @@ div[role="listbox"],
     border-radius: 8px !important;
 }
 
-/* Baris Opsi Pilihan di Dalam Dropdown (Tampilan Awal & Diklik) */
 div[role="option"],
 div[role="option"] span,
 div[role="option"] div,
@@ -70,7 +67,6 @@ li[role="option"] span {
     font-size: 14px !important;
 }
 
-/* Efek ketika opsi dropdown disorot/hover (Hover) */
 div[role="option"]:hover,
 div[role="option"]:active,
 li[role="option"]:hover,
@@ -83,26 +79,22 @@ div[data-baseweb="popover"] ul li:hover {
 
 
 /* ==================== 2. NUMBER INPUT BOX ==================== */
-/* Kotak Utama Input Nilai (Gradasi Biru) */
 div[data-baseweb="input"] {
     background: linear-gradient(135deg, #0b3c5d 0%, #328cc1 100%) !important;
     border: 2px solid #328cc1 !important;
     border-radius: 8px !important;
 }
 
-/* Mengubah background bagian dalam input agar transparan mengikuti gradasi */
 div[data-baseweb="input"] input {
     background-color: transparent !important;
-    color: white !important; /* Teks angka saat dimasukkan berwarna putih */
+    color: white !important; 
     font-weight: bold !important;
 }
 
-/* Memastikan teks nilai berwarna putih saat posisi fokus/diklik */
 div[data-baseweb="input"] input:focus {
     color: white !important;
 }
 
-/* Memaksa tombol plus/minus (+ dan -) bawaan Streamlit berwarna putih */
 div[data-baseweb="input"] button {
     color: white !important;
     background-color: transparent !important;
@@ -110,26 +102,22 @@ div[data-baseweb="input"] button {
 
 
 /* ==================== 3. KONTEN LAINNYA ==================== */
-/* Lapisan putih transparan di tengah agar teks konten mudah dibaca */
 .main .block-container {
     background: rgba(255,255,255,0.45);
     padding: 2rem;
     border-radius: 15px;
 }
 
-/* Tabel markdown */
 table, th, td {
     color: black !important;
     font-weight: bold !important;
 }
 
-/* Kotak info bawaan Streamlit */
 .stInfo {
     color: black !important;
     font-weight: bold !important;
 }
 
-/* GAYA KHUSUS UNTUK KOTAK PUTIH TABEL PANDUAN DAN FOOTER */
 .custom-white-box {
     background-color: rgba(255, 255, 255, 0.9) !important;
     padding: 15px;
@@ -639,7 +627,6 @@ elif fitur == "MENENTUKAN INDIKATOR TITRASI":
     else:
         st.info("👆 Pilih jenis titrasi di atas untuk memulai.", icon="⚠️")
         
-        # PERUBAHAN 1: Membungkus Tabel Panduan Singkat ke dalam Kotak Putih Khusus (.custom-white-box)
         st.markdown(
             """
             <div class="custom-white-box">
@@ -661,39 +648,4 @@ elif fitur == "MENENTUKAN INDIKATOR TITRASI":
                         <tr style="border-bottom: 1px solid #ddd;">
                             <td style="padding: 8px; color: black !important; font-weight: bold !important;">Redoks</td>
                             <td style="padding: 8px; color: black !important; font-weight: bold !important;">KMnO₄ / Na₂S₂O₃</td>
-                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">Fe²⁺, Cl⁻, I₂</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #ddd;">
-                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">Kompleksometri</td>
-                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">EDTA</td>
-                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">Ca²⁺, Mg²⁺, Zn²⁺</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">Pengendapan</td>
-                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">AgNO₃</td>
-                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">Cl⁻, Br⁻, I⁻</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-# ─────────────────────────────────────────────
-# FOOTER
-# ─────────────────────────────────────────────
-st.divider()
-
-# PERUBAHAN 2: Membungkus Teks Footer dengan latar belakang kotak putih (.custom-white-box) 
-# serta memberikan ketebalan maksimal
-st.markdown(
-    """
-    <div class="custom-white-box" style="text-align:center; max-width: 400px; margin: 0 auto;">
-        <span style='color: #000000 !important; font-weight: 900 !important; font-size: .9em;'>
-            ⚛️ Sistem Rekomendasi Titrasi &nbsp;|&nbsp; Kelompok 5
-        </span>
-    </div>
-    """,
-    unsafe_allow_html=True,
-                )
+                            <td style="padding: 8px; color: black !important; font-weight: bold !important;">Fe²⁺, Cl⁻
