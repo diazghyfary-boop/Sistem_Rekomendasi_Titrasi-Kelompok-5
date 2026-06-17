@@ -240,7 +240,7 @@ def step(n, label):
 # 6. SIDEBAR NAVIGATION (MENU DI SAMPING KIRI)
 # =============================================
 with st.sidebar:
-    st.markdown("## ⚛️ Sistem Rekomendasi Titrasi")
+    st.markdown("## ⚛️ Sistem Rekomendasi Titrasi ⚛️")
     st.markdown("### 📋 Menu Halaman")
     
     fitur = st.radio(
@@ -253,8 +253,7 @@ with st.sidebar:
         label_visibility="collapsed"
     )
     st.divider()
-    st.markdown("🧪**Sistem Rekomendasi Titrasi**🧪")
-    st.markdown("Dibuat oleh Kelompok 5")
+    st.markdown("⚜️ Dibuat oleh Kelompok 5 ⚜️")
 
 # =============================================
 # 7. KONTEN HALAMAN BERANDA
@@ -262,7 +261,8 @@ with st.sidebar:
 if fitur == "🏠 Beranda":
     st.markdown(
         """<div class="custom-white-box" style="text-align: center; padding: 30px;">
-            <h2 style="color: #0b3c5d !important; margin-bottom: 5px;">👋 SELAMAT DATANG DI PROGRAM APLIKASI KAMI</h2>
+            <h2 style="color: #0b3c5d !important; margin-bottom: 5px;">👋 SELAMAT DATANG 
+            DI PROGRAM APLIKASI KAMI</h2>
             <p style="font-size: 1.2em; color: #328cc1 !important; margin-top: 0px; margin-bottom: 20px;">DARI</p>
             <h1 style="color: #e53935 !important; letter-spacing: 2px; margin-bottom: 5px;">⚜️ KELOMPOK 5 ⚜️</h1>
             <h3 style="color: #43a047 !important; margin-top: 0px; margin-bottom: 35px;">KELAS 1D</h3>
